@@ -1,0 +1,37 @@
+{
+  "name": "richtexteditor",
+  "version": "1.0.0",
+  "description": "a rich text editor for mobile",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WilliamDu1981/richTextEditorForMobile.git"
+  },
+  "keywords": [
+    "rich",
+    "text",
+    "editor"
+  ],
+  "author": "Wiliiam Du",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/WilliamDu1981/richTextEditorForMobile/issues"
+  },
+  "homepage": "https://github.com/WilliamDu1981/richTextEditorForMobile#readme",
+  "dependencies": {
+    "body-parser": "^1.15.0",
+    "bootstrap": "^3.3.6",
+    "bootstrap-wysiwyg": "^1.0.4",
+    "cookie-parser": "^1.4.1",
+    "ejs": "^2.4.1",
+    "express": "^4.13.4",
+    "font-awesome": "^4.6.1",
+    "jquery": "^2.2.3",
+    "jquery.hotkeys": "^0.1.0",
+    "morgan": "^1.7.0",
+    "path": "^0.12.7"
+  }
+}
