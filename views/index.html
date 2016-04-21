@@ -85,41 +85,53 @@
       height: 100%;
       display: flex;
       align-items: center;
+      justify-content: space-between;
     }
 
-    .btn-toolbar .btn{
-      float:none;
+    .btn-toolbar .btn {
+      float: none;
+      display: list-item;
+      list-style: none;
     }
 
-    .btn-info{
+    .btn-info {
       background: none;
       border: none;
-      color:#49afcd
+      color: #49afcd
     }
 
-    a{
-      color:#999;
+    a {
+      color: #999;
     }
 
-    .popover{
-      top:33px;
+    .popover {
+      top: 33px;
       min-width: 170px;
-      left:50%;
+      left: 50%;
       transform: translateX(-50%);
       padding: 5px;
     }
 
-    .popover-content{
+    .popover-content {
       padding: 0;
     }
 
-    .popover-content>li{
+    .popover-content > li {
       float: left;
       width: 38px;
     }
 
-    .btn:active:focus{
+    .btn:active:focus {
       box-shadow: none;
+    }
+
+    .modal {
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .modal-content {
+      padding: 10px;
     }
   </style>
 </head>
@@ -174,36 +186,58 @@
               </a>
             </li>
             <li>
-              <a class="btn btn-info" data-edit="justifyleft" title="" data-original-title="Align Left (Ctrl/Cmd+L)"><i class="fa fa-align-left"></i></a>
+              <a class="btn btn-info" data-edit="justifyleft" title="" data-original-title="Align Left (Ctrl/Cmd+L)"><i
+                class="fa fa-align-left"></i></a>
             </li>
             <li>
-              <a class="btn" data-edit="justifycenter" title="" data-original-title="Center (Ctrl/Cmd+E)"><i class="fa fa-align-center"></i></a>
+              <a class="btn" data-edit="justifycenter" title="" data-original-title="Center (Ctrl/Cmd+E)"><i
+                class="fa fa-align-center"></i></a>
             </li>
             <li>
-              <a class="btn" data-edit="justifyright" title="" data-original-title="Align Right (Ctrl/Cmd+R)"><i class="fa fa-align-right"></i></a>
+              <a class="btn" data-edit="justifyright" title="" data-original-title="Align Right (Ctrl/Cmd+R)"><i
+                class="fa fa-align-right"></i></a>
 
             </li>
 
             <li>
-              <a class="btn" data-edit="justifyfull" title="" data-original-title="Justify (Ctrl/Cmd+J)"><i class="fa fa-align-justify"></i></a>
+              <a class="btn" data-edit="justifyfull" title="" data-original-title="Justify (Ctrl/Cmd+J)"><i
+                class="fa fa-align-justify"></i></a>
             </li>
           </div>
         </div>
       </div>
-
       <div class="btn-group">
-        <a class="btn btn-large dropdown-toggle" data-toggle="dropdown">
-          <i class="fa fa-link"></i>
+        <a class="btn dropdown-toggle" data-toggle="dropdown">
+          <i class="fa fa-text-height"></i>&nbsp;
+          <b class="caret"></b>
         </a>
-        <div class="dropdown-menu">
-          <input type="text" data-edit="createLink" placeholder="请输入链接地址">
-          <button class="btn btn-xs">添加</button>
-        </div>
+        <ul class="dropdown-menu">
+          <li><a data-edit="fontSize 6"><font size="6">一号</font></a></li>
+          <li><a data-edit="fontSize 5"><font size="5">二号</font></a></li>
+          <li><a data-edit="fontSize 4"><font size="4">三号</font></a></li>
+          <li><a data-edit="fontSize 3"><font size="3">四号</font></a></li>
+          <li><a data-edit="fontSize 2"><font size="2">五号</font></a></li>
+        </ul>
       </div>
 
       <div class="btn-group">
+        <a class="btn" data-toggle="dropdown"><i class="fa fa-link"></i></a>
+        <ul class="popover fade bottom in dropdown-menu">
+          <div class="arrow" style="left: 50%;"></div>
+          <div class="popover-content">
+            <input class="form-control" type="text" data-edit="createLink" placeholder="请输入链接地址">
+
+            <button class="btn btn-primary btn-block" style="margin-top:10px;">添加</button>
+          </div>
+        </ul>
+      </div>
+
+      <a class="btn" data-edit="unlink" title="" data-original-title="Remove Hyperlink"><i class="fa fa-cut"></i></a>
+
+      <div class="btn-group">
         <a class="btn" title="" id="pictureBtn"><i class="fa fa-image"></i></a>
-        <input type="file" data-role="magic-overlay" data-target="#pictureBtn" data-edit="insertImage" style="opacity: 0; position: absolute; top: 0px; left: 0px; width: 41px; height: 30px;">
+        <input type="file" data-role="magic-overlay" data-target="#pictureBtn" data-edit="insertImage"
+               style="opacity: 0; position: absolute; top: 0px; left: 0px; width: 41px; height: 30px;">
       </div>
     </div>
   </header>
@@ -230,8 +264,8 @@
       e.stopPropagation();
     });
     $('#submit').on('click', function () {
-      console.log($('#rich-editor').html());
-    })
+      $('#rich-editor').html();// 获取输入内容
+    });
   });
 </script>
 </body>
