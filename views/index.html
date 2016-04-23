@@ -92,6 +92,11 @@
       float: none;
       display: list-item;
       list-style: none;
+      margin: 0;
+    }
+
+    .btn-toolbar .btn-group{
+      margin: 0;
     }
 
     .btn-info {
@@ -220,6 +225,10 @@
         </ul>
       </div>
 
+      <a class="btn" data-edit="blockquote">
+        <i class="fa fa-quote-right"></i>
+      </a>
+
       <div class="btn-group">
         <a class="btn" data-toggle="dropdown"><i class="fa fa-link"></i></a>
         <ul class="popover fade bottom in dropdown-menu">
@@ -232,7 +241,7 @@
         </ul>
       </div>
 
-      <a class="btn" data-edit="unlink" title="" data-original-title="Remove Hyperlink"><i class="fa fa-cut"></i></a>
+      <!--<a class="btn" data-edit="unlink" title="" data-original-title="Remove Hyperlink"><i class="fa fa-cut"></i></a>-->
 
       <div class="btn-group">
         <a class="btn" title="" id="pictureBtn"><i class="fa fa-image"></i></a>
@@ -254,7 +263,34 @@
 <script src="/libs/bootstrap-wysiwyg.js"></script>
 <script>
   $(function () {
-    $('#rich-editor').wysiwyg();
+    $('#rich-editor').wysiwyg({
+      //文件上传地址
+      uploadUrl:'/upload',
+
+      //file参数别名，根据服务端需要指定
+      alias:'file',
+
+      //额外需要的参数，根据自己需要指定
+      params:{
+        user:1002
+      },
+
+      //上传成功后会调用此函数来处理返回的数据，
+      //!!!此函数必须确保返回的是图片地址，否则无法将图片添加到编辑器!!!
+      responseHandler:function(resp){
+        return resp.data;
+      },
+
+      //在传过程中会持续调用，可以在里面计算上传进度
+      fileUploadProgress:function(e){
+        console.log(e);
+      },
+
+      //上传失败会触发回调
+      fileUploadError:function(reason,detail){
+
+      }
+    });
 
     $(document).on('touchmove', function (e) {
       e.preventDefault();
