@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+  <title>Rich Text Editor</title>
+  <link href="./css/bootstrap.min.css" rel="stylesheet">
+  <link href="./css/font-awesome.min.css" rel="stylesheet">
+  <link href="./css/style.css" rel="stylesheet">
+  <style type="text/css">
+    html, body {
+      height: 100%;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    .content {
+      width: 100%;
+      position: absolute;
+      overflow: hidden;
+      top: 0;
+      bottom: 0;
+    }
+
+    .bar {
+      height: 40px;
+      width: 100%;
+      position: absolute;
+      left: 0;
+    }
+
+    .bar.bar-header {
+      top: 0
+    }
+
+    .bar.bar-header.has-border {
+      border-bottom: 1px solid #eaeaea;
+    }
+
+    .bar.bar-footer {
+      bottom: 0;
+    }
+
+    .bar.bar-footer.has-border {
+      border-top: 1px solid #eaeaea;
+    }
+
+    .content.has-footer {
+      bottom: 40px;
+    }
+
+    .content.has-header {
+      top: 40px;
+    }
+
+    #rich-editor {
+      width: 100%;
+      height: 100%;
+      border: none;
+      padding: 10px;
+      overflow: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    #rich-editor:focus, #rich-editor:active {
+      border: none !important;
+      box-shadow: none !important;
+      outline: none !important;
+    }
+
+    .form-control, .form-control:focus {
+      border: none;
+      box-shadow: none;
+      border-radius: 0;
+    }
+
+    .form-control.form-control-block {
+      width: 100%;
+      height: 100%;
+    }
+
+    .btn-toolbar {
+      padding: 0;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .btn-toolbar .btn {
+      float: none;
+      display: list-item;
+      list-style: none;
+      margin: 0;
+    }
+
+    .btn-toolbar .btn-group{
+      margin: 0;
+    }
+
+    .btn-info {
+      background: none;
+      border: none;
+      color: #49afcd
+    }
+
+    a {
+      color: #999;
+    }
+
+    .popover {
+      top: 33px;
+      min-width: 170px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 5px;
+    }
+
+    .popover-content {
+      padding: 0;
+    }
+
+    .popover-content > li {
+      float: left;
+      width: 38px;
+    }
+
+    .btn:active:focus {
+      box-shadow: none;
+    }
+
+    .modal {
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .modal-content {
+      padding: 10px;
+    }
+  </style>
+</head>
+<body>
+
+<!--头部header 标题输入-->
+<header class="bar bar-header has-border">
+  <input type="text" class="form-control form-control-block" placeholder="标题">
+</header>
+
+<!--内容区-->
+<div class="content has-header">
+  <!--工具栏-->
+  <header class="bar bar-header has-border">
+    <div class="btn-toolbar" data-role="editor-toolbar" data-target="#rich-editor">
+      <a class="btn" data-edit="undo">
+        <i class="fa fa-undo"></i>
+      </a>
+
+      <a class="btn" data-edit="redo">
+        <i class="fa fa-repeat"></i>
+      </a>
+
+      <div class="btn-group">
+        <a class="btn dropdown-toggle" data-toggle="dropdown">
+          <i class="fa fa-font"></i>
+        </a>
+        <div class="popover fade bottom in dropdown-menu">
+          <div class="arrow" style="left: 50%;"></div>
+          <div class="popover-content clearfix">
+            <li class="">
+              <a class="btn btn-large" data-edit="bold">
+                <i class="fa fa-bold"></i>
+              </a>
+            </li>
+
+            <li>
+              <a class="btn" data-edit="italic">
+                <i class="fa fa-italic"></i>
+              </a>
+            </li>
+
+            <li>
+              <a class="btn" data-edit="strikethrough">
+                <i class="fa fa-strikethrough"></i>
+              </a>
+            </li>
+
+            <li>
+              <a class="btn" data-edit="underline">
+                <i class="fa fa-underline"></i>
+              </a>
+            </li>
+            <li>
+              <a class="btn btn-info" data-edit="justifyleft" title="" data-original-title="Align Left (Ctrl/Cmd+L)"><i
+                class="fa fa-align-left"></i></a>
+            </li>
+            <li>
+              <a class="btn" data-edit="justifycenter" title="" data-original-title="Center (Ctrl/Cmd+E)"><i
+                class="fa fa-align-center"></i></a>
+            </li>
+            <li>
+              <a class="btn" data-edit="justifyright" title="" data-original-title="Align Right (Ctrl/Cmd+R)"><i
+                class="fa fa-align-right"></i></a>
+
+            </li>
+
+            <li>
+              <a class="btn" data-edit="justifyfull" title="" data-original-title="Justify (Ctrl/Cmd+J)"><i
+                class="fa fa-align-justify"></i></a>
+            </li>
+          </div>
+        </div>
+      </div>
+      <div class="btn-group">
+        <a class="btn dropdown-toggle" data-toggle="dropdown">
+          <i class="fa fa-text-height"></i>&nbsp;
+          <b class="caret"></b>
+        </a>
+        <ul class="dropdown-menu">
+          <li><a data-edit="fontSize 6"><font size="6">一号</font></a></li>
+          <li><a data-edit="fontSize 5"><font size="5">二号</font></a></li>
+          <li><a data-edit="fontSize 4"><font size="4">三号</font></a></li>
+          <li><a data-edit="fontSize 3"><font size="3">四号</font></a></li>
+          <li><a data-edit="fontSize 2"><font size="2">五号</font></a></li>
+        </ul>
+      </div>
+
+      <a class="btn" data-edit="blockquote">
+        <i class="fa fa-quote-right"></i>
+      </a>
+
+      <div class="btn-group">
+        <a class="btn" data-toggle="dropdown"><i class="fa fa-link"></i></a>
+        <ul class="popover fade bottom in dropdown-menu">
+          <div class="arrow" style="left: 50%;"></div>
+          <div class="popover-content">
+            <input class="form-control" type="text" data-edit="createLink" placeholder="请输入链接地址">
+
+            <button class="btn btn-primary btn-block" style="margin-top:10px;">添加</button>
+          </div>
+        </ul>
+      </div>
+
+      <!--<a class="btn" data-edit="unlink" title="" data-original-title="Remove Hyperlink"><i class="fa fa-cut"></i></a>-->
+
+      <div class="btn-group">
+        <a class="btn" title="" id="pictureBtn"><i class="fa fa-image"></i></a>
+        <input type="file" data-role="magic-overlay" data-target="#pictureBtn" data-edit="insertImage"
+               style="opacity: 0; position: absolute; top: 0px; left: 0px; width: 41px; height: 30px;">
+      </div>
+    </div>
+  </header>
+  <div class="content has-header">
+    <div id="rich-editor" placeholder="请输入内容">
+
+    </div>
+  </div>
+</div>
+
+<script src="./libs/jquery.min.js"></script>
+<script src="./libs/bootstrap.min.js"></script>
+<script src="./libs/jquery.hotkeys.js"></script>
+<script src="./libs/bootstrap-wysiwyg.js"></script>
+<script>
+  $(function () {
+    $('#rich-editor').wysiwyg({
+      //文件上传地址
+      uploadUrl:'/upload',
+
+      //file参数别名，根据服务端需要指定
+      alias:'file',
+
+      //额外需要的参数，根据自己需要指定
+      params:{
+        user:1002
+      },
+
+      //上传成功后会调用此函数来处理返回的数据，
+      //!!!此函数必须确保返回的是图片地址，否则无法将图片添加到编辑器!!!
+      responseHandler:function(resp){
+        return resp.data;
+      },
+
+      //在传过程中会持续调用，可以在里面计算上传进度
+      fileUploadProgress:function(e){
+        console.log(e);
+      },
+
+      //上传失败会触发回调
+      fileUploadError:function(reason,detail){
+
+      }
+    });
+
+    $(document).on('touchmove', function (e) {
+      e.preventDefault();
+    });
+
+    $('.content').on('touchstart touchmove touchend', function (e) {
+      e.stopPropagation();
+    });
+    $('#submit').on('click', function () {
+      $('#rich-editor').html();// 获取输入内容
+    });
+  });
+</script>
+</body>
+</html>

@@ -289,6 +289,17 @@
           saveSelection();
           //this.value = '';
         });
+
+        editor.on('keypress',function(e){
+          if(e.keyCode===13){
+            var html=editor.html();
+            var reg=/\<\/blockquote\>[\<\/div\>]*$/;
+            if(html.match(reg)){
+              execCommand('insertHTML','<div><br></div>');
+              e.preventDefault();
+            }
+          }
+        });
       },
       initFileDrops = function () {
         editor.on('dragenter dragover', false)
